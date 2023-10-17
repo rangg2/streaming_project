@@ -1,0 +1,12 @@
+.back {
+    background-size: auto 100%;
+    display: flex;
+    flex-shrink: 0;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-repeat: repeat-x;
+    animation: 100s linear 0s infinite normal none running liBDgu;
+    height: calc(256px * var(--ratio));
+}
