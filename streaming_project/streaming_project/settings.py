@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'main',
 ]
 
@@ -93,7 +94,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": get_secret("POSTGRESQL_NAME"),
-        "USER": get_secret("POSTGRESQL_USR"),
+        "USER": get_secret("POSTGRESQL_USER"),
         "PASSWORD": get_secret("POSTGRESQL_KEY"),
         "HOST": get_secret("POSTGRESQL_HOST"),
         "PORT": "5432",

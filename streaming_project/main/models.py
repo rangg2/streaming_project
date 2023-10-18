@@ -3,16 +3,19 @@ import json
 
 # Create your models here.
 class anime_info(models.Model):
-    name = models.CharField(max_length=100)
-    url = models.CharField(max_length=100)
-    image = models.CharField(max_length=100)
-    content =models.CharField(max_length=100)
-    ended = models.BooleanField()
-    awards = models.CharField(max_length=200)
-    content_rating = models.CharField(max_length=100)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    image = models.ImageField(upload_to='images/', null=True, default='')
+    name = models.CharField(max_length=100) # 제목
+    url = models.CharField(max_length=100) # 링크
+    image = models.CharField(max_length=100) # 커버 사진
+    content =models.CharField(max_length=100) # 줄거리
+    ended = models.BooleanField() # 완결 여부
+    awards = models.CharField(max_length=200) # 받은 상
+    content_rating = models.CharField(max_length=100) # 콘텐츠 등급
+    viewable = models.BooleanField(default='1') # 시청 가능 여부 ( 결제 여부? )
+    genres = models.CharField(max_length=200, default='') # 장르
+    tags = models.CharField(max_length=200,default='') # 태그
+    airday = models.CharField(max_length=100, default='') # 방영 요일
+    production = models.CharField(max_length=100, default='') # 제작사
+    
 
     def __str__(self):
         return self.title
@@ -22,3 +25,9 @@ class anime_info(models.Model):
     
     def get_awards(self):
         return json.loads(self.awards)
+    
+    def set_genres(self, x):
+        self.genres = json.dumps(x)
+    
+    def get_genres(self):
+        return json.loads(self.genres)

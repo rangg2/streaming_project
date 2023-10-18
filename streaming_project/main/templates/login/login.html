@@ -1,11 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}?{% now "U" %}">
     <title>회원가입 / 로그인 - 라프텔</title>
 </head>
 <body>
-    
+    {% if user.is_authenticated %}
+    <p>{{ user.username }}</p>
+    <a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+    <form id="logout" method="POST" action="{% url 'logout' %}">
+        {% csrf_token %} <input type="hidden" />
+    </form>
+    {% else %}
+    <div>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="box">
+                <h3>Laftel</h3><br>
+                <input type="text" name="username" placeholder="user name">
+                <input type="password" name="password" placeholder="password">
+                <input type="submit" value="Login" class="login">
+                {% comment %} <div class="social">
+                    <a href="{% provider_login_url 'google' %}" style="background-color:#4285F4">
+                        <div class="social_flex"><div class="social_img google"><img src="{% static 'img/google.svg' %}"></div><div class="social-text">Login with Google</div></div>
+                    </a>
+                    <a href="{% provider_login_url 'naver' %}" style="background-color:#03c75a">
+                        <div class="social_flex"><div class="social_img"><img src="{% static 'img/naver.svg' %}"></div><div class="social-text">Login with Naver</div></div>
+                    </a>
+                    <a href="{% provider_login_url 'kakao' %}" style="background-color:#f9e000">
+                        <div class="social_flex"><div class="social_img"><img src="{% static 'img/kakao.svg' %}"></div><div class="social-text">Login with Kakao</div></div>
+                    </a>
+                </div> {% endcomment %}
+                {% comment %} <a href="{% url 'signup' %}" style="color:#1e1e1e;">Signup /</a>
+                <a href="{% url 'board' %}" style="color:#1e1e1e;"> Home</a> {% endcomment %}
+            </div>
+        </form>   
+    </div>
+    {% endif %}
 </body>
 </html>
