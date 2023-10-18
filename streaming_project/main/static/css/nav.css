@@ -4,19 +4,21 @@ nav{
     justify-content: space-between;
     position: fixed;
     top: 0;
-    background-color: #fff;
+    background-color:transparent;
     width: 100%;
     z-index: 999;
     color: #f9f8f4;
     text-decoration: none;
     font-family: 'Pretendard', sans-serif;
     padding: 14px 0;
+    position: fixed;
 }
 
 .logo{
     margin-right: 68px;
     width: 72px;
     height: 36px;
+    background-color: transparent;
     /* border: 1px solid black; */
 }
 
@@ -55,4 +57,29 @@ input{
 .orange-text{
     color: #fa6616;
     
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+    border: 1px solid black;
+}
+
+.container_n{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    border: 1px solid black;
+}
+
+.gap8{
+    gap: 8px;
+}
+
+.full-box{
+    display: flex;
+    flex-direction: row;
 }

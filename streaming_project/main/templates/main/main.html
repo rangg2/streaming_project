@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/main.css' %}?{% now "U" %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
     <title> 라프텔</title>
 </head>
 <body>
@@ -52,5 +53,6 @@
         
         </article>
     </section>
+    {% include 'main/footer.html' %}
 </body>
 </html>
