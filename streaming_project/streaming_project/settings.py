@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'main',
+    'laftel',
 ]
 
 MIDDLEWARE = [
@@ -96,8 +97,8 @@ DATABASES = {
         "NAME": get_secret("POSTGRESQL_NAME"),
         "USER": get_secret("POSTGRESQL_USER"),
         "PASSWORD": get_secret("POSTGRESQL_KEY"),
-        "HOST": "localhost",
-        "PORT": "5432",
+        "HOST": get_secret("POSTGRESQL_HOST"),
+        "PORT": "5433",
     }
 }
 # DATABASES = {

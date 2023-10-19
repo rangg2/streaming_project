@@ -14,9 +14,17 @@ nav{
     position: fixed;
 }
 
+.laftel_{
+    font-size: x-large;
+    color:grey;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
 .logo{
     margin-right: 68px;
-    width: 72px;
+    margin-left: 10px;
+    width: 86px;
     height: 36px;
     background-color: transparent;
     /* border: 1px solid black; */
@@ -32,13 +40,14 @@ nav{
     border: none;
     background-color: transparent;
     font-weight: 700;
-
+    color:grey;
 }
 
 .ghost-button{
     font-size: 16px;
     padding: 6px 16px;
     text-decoration: none;
+    color:grey;
     border: 1px solid #d7d7d7;
 }
 
@@ -51,7 +60,7 @@ input{
     background-color: #f3f3f3;
     padding:6px 16px;
     font-size: 16px;
-    border: none;
+    border: 1px solid black;
 }
 
 .orange-text{
@@ -59,27 +68,15 @@ input{
     
 }
 
-.flex-box{
-    display: flex;
-    flex-direction: row;
-    margin-right: 50px;
-    border: 1px solid black;
-}
+
 
 .container_n{
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .gap8{
     gap: 8px;
-}
-
-.full-box{
-    display: flex;
-    flex-direction: row;
 }

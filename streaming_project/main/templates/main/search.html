@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Laftel Anime Search Results</h1>
+    <ul>
+        {% for result in results %}
+            <li>
+                <a href="{{ result.url }}">{{ result.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

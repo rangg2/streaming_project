@@ -44,3 +44,57 @@ def logout(request):
 
 def main(request):
     return render(request, 'main/main.html')
+def tag(request):
+    return render(request, 'main/tag.html')
+def recommend(request):
+    return render(request, 'main/recommend.html')
+def daily(request):
+    return render(request, 'main/daily.html')
+def member(request):
+    return render(request, 'main/member.html')
+def play(request):
+    return render(request, 'player/play.html')
+
+import laftel
+from django.http import JsonResponse
+from django.http import HttpResponse
+import json
+
+def search_anime(request):
+    query = "전생슬"
+    results = laftel.sync.searchAnime(query)
+    # 여기에서 결과를 가공하거나 필요한 데이터를 추출할 수 있습니다.
+    return JsonResponse({'results': results})
+
+# def get_anime_info(request, anime_id):
+#     anime_info = laftel.sync.getAnimeInfo(anime_id)
+#     # 필요한 데이터를 추출하거나 다룰 수 있습니다.
+#     return JsonResponse({'anime_info': anime_info})
+
+def laftel_view(request):
+    query = "전생슬"
+    results = laftel.sync.searchAnime(query)
+    context = {'results': results}
+    return render(request, 'main/search.html', context)
+
+def get_anime_info(request):
+    try:
+        # Laftel 라이브러리를 사용하여 "전생슬" 애니메이션 정보를 가져옵니다.
+        response = laftel.sync.searchAnime("이로하")
+        
+        result_list = []
+        for item in response:
+            result_list.append({
+                "id": item.id,
+                "name": item.name,
+                "url": item.url,
+                "image": item.image,
+                # 다른 필드도 필요한 만큼 추가
+            })
+
+        # JSON으로 직렬화
+        json_data = json.dumps(result_list, ensure_ascii=False).encode('utf-8')
+        return HttpResponse(json_data, content_type='application/json')
+
+    except Exception as e:
+        return HttpResponse(json.dumps({"error": f"API request error: {str(e)}"}), content_type='application/json')

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/main.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
     <title> 라프텔</title>
 </head>
@@ -32,19 +34,19 @@
                 
                         <div class="card">
                             <div class="card-thumbnail-img">
-                                {% comment %} {% if  post.content|get_img_src %}
+                                {% comment %}  {% if  post.content|get_img_src %}
                                     <img src="{{post.content|get_img_src}}" onerror="{% static "img/no_photos.svg" %}"alt="Thumbnail image" />
                                 {% else %}
                                     <img src="{% static "img/no_photos.svg" %}" alt="Thumbnail image" style="width: auto; height: 100%; background-color: transparent" />
-                                {% endif %} {% endcomment %}
+                                {% endif %}  {% endcomment %}
                             </div>
                             <a 
                             {% comment %} href="{% url 'post_detail' post.id %}" {% endcomment %}
                             >
                             <div class="card-info-box">
-                                    {% comment %} <p>{{ post.created_at|date:'Y-m-d H:i' }} | {{post.user_id}}</p>
+                                {% comment %} <p>{{ post.created_at|date:'Y-m-d H:i' }} | {{post.user_id}}</p>
                                     <h3>{{ post.title }}</h3>
-                                    <div class="sub-info">{{ post.content|text_only }} </div> {% endcomment %}
+                                    <div class="sub-info">{{ post.content|text_only }} </div>  {% endcomment %}
                             </div>
                             </a>
                         </div>

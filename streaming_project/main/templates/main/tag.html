@@ -5,38 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}?{% now "U" %}">
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/tag.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
     <title>Document</title>
 </head>
 <body>
     {% include 'main/nav.html' %}
-    <h3>요일별 신작</h3>
-    <div>안내사항</div>
+<div class="content">
+    <h3>태그검색</h3>
     <div>
         <div>
-            월
+            필터
         </div>
         <div>
-            화
+            장르
         </div>
-        <div>
-            수
+        <div>        
+            태그
         </div>
-        <div>
-            목
+        <div>        
+            년도
         </div>
-        <div>
-            금
+        <div>        
+            방영
         </div>
-        <div>
-            토
-        </div>
-        <div>
-            일
+        <div>        
+            출시타입
         </div>
     </div>
+    <div>
+        영상 영상 영상
+    </div>
+</div>
 
 </body>
 </html>

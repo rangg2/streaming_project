@@ -2,26 +2,27 @@
 
 <nav>
 <div class="container_n">
-    <div class="full-box between">
+    <div class="full-box flex-box between">
         <div class="flex-box">
                 <div>
                     <a href="{% url 'main' %}">
-                        <img class="logo" src="{% static 'img/logo.png' %}" alt=""/>
+                        {% comment %} <img class="logo" src="{% static 'img/logo.png' %}" alt=""/> {% endcomment %}
+                        <p class="laftel_">LAFTEL</p>
                     </a>
                 </div>
                 <div class="nav-buttons">
-                    <a href="/tag">
-                        <button id="trade-button">태그검색</button>
+                    <a href="{% url 'tag'%}">
+                        <button>태그검색</button>
                     </a>
                     <a href="/daily">
-                        <button id="trade-button">요일신작</button>
+                        <button>요일신작</button>
                     </a>
-                    <a href="recommend">
-                        <button id="trade-button">테마추천</button>
+                    <a href="/recommend">
+                        <button>테마추천</button>
                     </a>
                     {% if user.is_authenticated %}
-                        <a href="/location">
-                        <button id="location-button">멤버십</button>
+                        <a href="/member">
+                        <button>멤버십</button>
                         </a>
                     {% endif %}
                 </div>
