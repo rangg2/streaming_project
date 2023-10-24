@@ -10,6 +10,37 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
     <title> 라프텔</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // API 요청을 보내고 데이터를 받아오는 함수
+            function fetchAnimeInfo() {
+                fetch('/api/anime/')  // API 엔드포인트 URL을 적절히 수정하세요.
+                    .then(response => response.json())
+                    .then(data => {
+                        const animeName = data.name;  // API 응답에서 원하는 데이터 필드를 사용하세요.
+                        const animeNameElement = document.getElementById('anime-name');
+                        animeNameElement.textContent = animeName;
+                        
+                        const animeContent = data.content;  // API 응답에서 원하는 데이터 필드를 사용하세요.
+                        const animeContentElement = document.getElementById('anime-content');
+                        animeContentElement.textContent = animeContent;
+
+                        const animeImage = data.image;
+                        const animeImageElement = document.getElementById('anime-img');
+                        const imageElement = document.createElement('img');
+                        imageElement.classList.add('first_image');
+                        imageElement.src = animeImage;
+                        animeImageElement.appendChild(imageElement);
+                    })
+                    .catch(error => {
+                        console.error('API request error:', error);
+                    });
+            }
+    
+            fetchAnimeInfo();  // 페이지 로딩 시 API 데이터를 가져오도록 호출
+    
+        });
+    </script>
 </head>
 <body>
     {% include 'main/nav.html' %}
@@ -20,11 +51,12 @@
             <div class="container desktop">
                 {% comment %} <a href="{% url 'post_detail' post.id %}"> {% endcomment %}
                     <div class="post-info-box">
-                        <h3>test</h3>
-                        <button>READ MORE</button>
+                        <h3 id="anime-name"></h3>
+                        <div id="anime-content"></div>
+                        {% comment %} <button>READ MORE</button> {% endcomment %}
                     </div>
-                </a>
-                {% comment %} <div class="thumbnail-img"><img src = {{ post.content|get_img_src }}></div> {% endcomment %}
+                {% comment %} </a> {% endcomment %}
+                <div class="thumbnail-img" id="anime-img"></div>
             </div>
         </div>
         <!-- 전체 게시글들 -->
@@ -57,4 +89,5 @@
     </section>
     {% include 'main/footer.html' %}
 </body>
+
 </html>

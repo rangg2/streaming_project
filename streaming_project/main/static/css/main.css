@@ -84,20 +84,22 @@ body {
     transition: transform 0.8s;
 }
 
-.first-post-box .container .thumbnail-img {
+.thumbnail-img {
     opacity: 0.7;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
     /* border : 5px solid white; */
     /* padding-left: 30%; */
+    justify-content: center;
 }
 
-.first-post-box .container .thumbnail-img img {
+.first_image {
     object-fit: cover;
-    min-width: 600px;
-    min-height: -webkit-fill-available;
+    justify-content: center;
+    /* min-width: 600px; */
+    /* min-height: -webkit-fill-available; */
     width: 100%;
     height: 100%;
-    /* border : 5px solid white; */
+    /* border : 1px solid white; */
 }
 
 

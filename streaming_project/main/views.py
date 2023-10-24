@@ -41,6 +41,25 @@ def logout(request):
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, "login/login.html")
 
+@csrf_exempt
+def signup(request):
+    # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
+    if request.method == "POST":
+        # password와 confirm에 입력된 값이 같다면
+        if request.POST["password"] == request.POST["confirm"]:
+            # user 객체를 새로 생성
+            user = User.objects.create_user(
+                username=request.POST["username"], password=request.POST["password"]
+            )
+            # 로그인 한다
+            # auth.login(request, user)
+            return redirect("/")
+        else:
+            return render(request, "failed.html")
+
+    # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
+    return render(request, "login/signup.html")
+
 
 def main(request):
     return render(request, 'main/main.html')
@@ -80,7 +99,8 @@ def laftel_view(request):
 def get_anime_info(request):
     try:
         # Laftel 라이브러리를 사용하여 "전생슬" 애니메이션 정보를 가져옵니다.
-        response = laftel.sync.searchAnime("이로하")
+        response = laftel.sync.searchAnime("나루토")
+        # response = laftel.sync.getAnimeInfo(avg_rating)
         
         result_list = []
         for item in response:
@@ -98,6 +118,36 @@ def get_anime_info(request):
 
     except Exception as e:
         return HttpResponse(json.dumps({"error": f"API request error: {str(e)}"}), content_type='application/json')
+    
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import AnimeInfoSerializer
+
+class AnimeInfoAPIView(APIView):
+    def get(self, request):
+        try:
+            # 이전 코드의 내용을 가져와서 시리얼라이즈
+            response = laftel.sync.searchAnime("이로하")
+            # result_list = []
+            sorted_response = sorted(response, key=lambda item: item.get_data().avg_rating, reverse=True)
+            first_info = sorted_response[0]
+            anime_info = first_info.get_data()
+           
+            
+            data = {
+                "id": anime_info.id,
+                "name": anime_info.name,
+                "url": anime_info.url,
+                "image": anime_info.image,
+                "avg_rating": anime_info.avg_rating,
+                "content" : anime_info.content,
+            }
+
+            serializer = AnimeInfoSerializer(data)
+            return Response(serializer.data)
+
+        except Exception as e:
+            return Response({"error": f"API request error: {str(e)}"}, status=500)
     
 
 from django.http import HttpResponse
