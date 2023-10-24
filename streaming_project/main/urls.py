@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path,include
 from . import views
 from django.contrib.auth import views as auth_views
+from main.views import list_kinesis_streams
 
 urlpatterns = [
     path('login/', views.login, name='login'),
@@ -16,4 +17,5 @@ urlpatterns = [
     path('search/', views.search_anime, name='search_anime'),
     # path('anime/<int:anime_id>/', views.get_anime_info, name='get_anime_info'),
     path('get_anime_info/', views.get_anime_info, name='get_anime_info'),
+    path('list_streams/', list_kinesis_streams, name='list_streams'),
 ]

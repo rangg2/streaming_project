@@ -98,3 +98,31 @@ def get_anime_info(request):
 
     except Exception as e:
         return HttpResponse(json.dumps({"error": f"API request error: {str(e)}"}), content_type='application/json')
+    
+
+from django.http import HttpResponse
+import boto3
+
+def list_kinesis_streams(request):
+    kvs_client = boto3.client('kinesisvideo', region_name='ap-northeast-2')
+
+    response = kvs_client.list_streams()
+    streams = response['StreamInfoList']
+
+    stream_list = []
+    for stream in streams:
+        stream_list.append(f"Stream Name: {stream['StreamName']}, ARN: {stream['StreamARN']}")
+
+    return HttpResponse("<br>".join(stream_list))
+
+def streaming_view(request):
+    kvs_client = boto3.client('kinesisvideo', region_name='ap-northeast-2')
+
+    # 스트림 ARN
+    stream_arn = " arn:aws:kinesisvideo:ap-northeast-2:170228352742:stream/streaming-project/1697763444995"
+
+    # 스트리밍 URL 생성
+    response = kvs_client.get_data_endpoint(StreamName='streaming-project', APIName='GET_MEDIA')
+    streaming_url = response['DataEndpoint']
+
+    return render(request, 'player/play.html', {'streaming_url': streaming_url})
