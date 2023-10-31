@@ -41,7 +41,7 @@ jobs:
           "AWS_BUKET_NAME": "${{ secrets.AWS_BUKET_NAME }}",
           "AWS_STATIC": "${{ secrets.AWS_STATIC }}",
           "AWS_MEDIA": "${{ secrets.AWS_MEDIA }}"
-        }' > secrets.json
+        }' > streaming_project/secrets.json
     - name: Run Tests
       run: |
         python streaming_project/manage.py test
