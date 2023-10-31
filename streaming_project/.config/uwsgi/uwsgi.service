@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI service
+After=syslog.target
+
+[Service]
+ExecStart=/home/ubuntu/project/streaming_env/bin/uwsgi -i /home/ubuntu/project/streaming_project/streaming_project/.config/uwsgi/streaming_project.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
