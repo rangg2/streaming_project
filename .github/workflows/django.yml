@@ -1,0 +1,57 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r streaming_project/requirements.txt
+    - name: Create JSON from Git Secrets
+      if: github.event_name == 'push'  # 푸시 이벤트가 발생한 경우에만 실행
+      run: |
+        echo '{
+          "POSTGRESQL_KEY": "${{ secrets.POSTGRESQL_KEY }}",
+          "POSTGRESQL_USER": "${{ secrets.POSTGRESQL_USER }}",
+          "POSTGRESQL_NAME": "${{ secrets.POSTGRESQL_NAME }}",
+          "POSTGRESQL_HOST": "${{ secrets.POSTGRESQL_HOST }}",
+          "NAVER_KEY": "${{ secrets.NAVER_KEY }}",
+          "NAVER_SECRET": "${{ secrets.NAVER_SECRET }}",
+          "AWS_ACCESS_KEY": "${{ secrets.AWS_ACCESS_KEY }}",
+          "AWS_SECRET_KEY": "${{ secrets.AWS_SECRET_KEY }}",
+          "AWS_BUKET_DOMAIN": "${{ secrets.AWS_BUKET_DOMAIN }}",
+          "AWS_BUKET_NAME": "${{ secrets.AWS_BUKET_NAME }}",
+          "AWS_STATIC": "${{ secrets.AWS_STATIC }}",
+          "AWS_MEDIA": "${{ secrets.AWS_MEDIA }}"
+        }' > streaming_project/secrets.json
+    
+    - name: Login to Docker Hub
+      run: docker login -u top0687 -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build Docker Image
+      run: docker build -t top0687/streaming:latest .
+    
+    - name: Push Docker Image
+      run: docker push to0687/streaming:latest
+      
+    - name: Run Tests
+      run: |
+        python streaming_project/manage.py test
