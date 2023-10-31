@@ -18,11 +18,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: create-json
-      id: create-json
-      uses: jsdaniell/create-json@1.1.2
-      with:
-        name: "secrets.json"
-        json: streaming_project/${{ secrets.SECERT_JSON }}
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "secrets.json"
+          json: streaming_project/${{ secrets.SECERT_JSON }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
