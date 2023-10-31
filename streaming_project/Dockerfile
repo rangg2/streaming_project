@@ -12,7 +12,7 @@ WORKDIR /main
 ADD . /main
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r streaming_project/requirements.txt
 
 # Expose a port for the Django development server
 EXPOSE 8000
