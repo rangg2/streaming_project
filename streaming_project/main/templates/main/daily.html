@@ -14,6 +14,15 @@
     {% include 'main/nav.html' %}
     <h3>요일별 신작</h3>
     <div>안내사항</div>
+
+    {% for day, anime_list in data.items %}
+    <h2>{{ day }} 방영 애니메이션</h2>
+    <ul>
+      {% for item in anime_list %}
+        <li>{{ item.name }} (방영 시간: {{ item.distributed_air_time }})</li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
     <div>
         <div>
             월
@@ -37,6 +46,5 @@
             일
         </div>
     </div>
-
 </body>
 </html>

@@ -67,8 +67,20 @@ def tag(request):
     return render(request, 'main/tag.html')
 def recommend(request):
     return render(request, 'main/recommend.html')
-def daily(request):
-    return render(request, 'main/daily.html')
+
+def Anime_list(request):
+    # 요일별로 데이터 필터링
+    data = {
+        '월요일': Anime.objects.filter(distributed_air_time='월요일'),
+        '화요일': Anime.objects.filter(distributed_air_time='화요일'),
+        '수요일': Anime.objects.filter(distributed_air_time='수요일'),
+        '목요일': Anime.objects.filter(distributed_air_time='목요일'),
+        '금요일': Anime.objects.filter(distributed_air_time='금요일'),
+        '토요일': Anime.objects.filter(distributed_air_time='토요일'),
+        '일요일': Anime.objects.filter(distributed_air_time='일요일'),
+    }
+    return render(request, 'main/daily.html', {'data': data})
+
 def member(request):
     return render(request, 'main/member.html')
 def play(request):
@@ -177,3 +189,19 @@ def streaming_view(request):
     streaming_url = response['DataEndpoint']
 
     return render(request, 'player/play.html', {'streaming_url': streaming_url})
+
+
+
+from .serializers import AnimeSerializer
+from .models import Anime
+
+class AnimeView(APIView):
+    def get(self, request):
+        data = Anime.objects.all()
+        serializer = AnimeSerializer(data, many=True)
+        return Response(serializer.data)
+    
+def Anime_list(request):
+    data = Anime.objects.all()
+    serializer = AnimeSerializer(data, many=True)
+    return render(request, 'main/main_cp.html', {'data': serializer.data})

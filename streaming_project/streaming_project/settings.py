@@ -40,7 +40,11 @@ SECRET_KEY = 'django-insecure-m7qzk0yjt)*@&i5kqt-4b98^qc7hxwxc%a&l18q^9&ralxsu-4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    ".ap-northeast-2.compute.amazonaws.com",
+    "oreumitale.store",
+    "localhost",
+    ]
 
 
 # Application definition

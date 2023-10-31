@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import Anime
 
 class AnimeInfoSerializer(serializers.Serializer):
     id = serializers.CharField()
@@ -8,3 +9,8 @@ class AnimeInfoSerializer(serializers.Serializer):
     avg_rating = serializers.FloatField()
     content = serializers.CharField()
     air_time = serializers.CharField()
+
+class AnimeSerializer(serializers.Serializer):
+    class Meta:
+        model = Anime
+        fields = '__all__'
