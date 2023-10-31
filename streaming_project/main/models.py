@@ -31,3 +31,23 @@ class anime_info(models.Model):
     
     def get_genres(self):
         return json.loads(self.genres)
+    
+class Anime(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    img = models.TextField()
+    cropped_img = models.TextField()
+    is_adult = models.BooleanField(default=False)
+    genres = models.JSONField()
+    medium = models.CharField(max_length=255)
+    distributed_air_time = models.CharField(max_length=255)
+    is_laftel_only = models.BooleanField(default=False)
+    is_uncensored = models.BooleanField(default=False)
+    is_dubbed = models.BooleanField(default=False)
+    is_avod = models.BooleanField(default=False)
+    avod_status = models.CharField(max_length=255)
+    is_viewing = models.BooleanField(default=True)
+    latest_episode_created = models.DateTimeField()
+    latest_published_datetime = models.DateTimeField()
+    is_episode_existed = models.BooleanField(default=True)
+    is_expired = models.BooleanField(default=False)
