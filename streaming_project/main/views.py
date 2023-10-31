@@ -141,6 +141,7 @@ class AnimeInfoAPIView(APIView):
                 "image": anime_info.image,
                 "avg_rating": anime_info.avg_rating,
                 "content" : anime_info.content,
+                "air_time" : anime_info.air_time,
             }
 
             serializer = AnimeInfoSerializer(data)
