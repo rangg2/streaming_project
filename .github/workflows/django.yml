@@ -22,7 +22,7 @@ jobs:
       uses: jsdaniell/create-json@1.1.2
       with:
         name: "secrets.json"
-        json: ${{ secrets.SECERT_JSON }}
+        json: streaming_project/${{ secrets.SECERT_JSON }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
