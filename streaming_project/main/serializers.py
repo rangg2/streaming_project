@@ -7,3 +7,4 @@ class AnimeInfoSerializer(serializers.Serializer):
     image = serializers.CharField()
     avg_rating = serializers.FloatField()
     content = serializers.CharField()
+    air_time = serializers.CharField()
