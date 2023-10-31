@@ -44,7 +44,7 @@ jobs:
         }' > streaming_project/secrets.json
     
     - name: Login to Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      run: docker login -u top0687 -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
       run: docker build -t top0687/streaming:latest .
