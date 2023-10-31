@@ -25,6 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r streaming_project/requirements.txt
+        echo "SECRET_JSON=$SECRET_JSON">> streaming_project/secrets.json
       env:
         SECRETS_JSON: ${{ secrets.SECRETS_JSON }}
     - name: Run Tests
