@@ -47,7 +47,7 @@ jobs:
       run: docker login -u top0687 -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t top0687/streaming:latest -f docker/Dockerfile .
+      run: docker build -t top0687/streaming:latest -f streaming_project/Dockerfile .
     
     - name: Push Docker Image
       run: docker push top0687/streaming:latest
