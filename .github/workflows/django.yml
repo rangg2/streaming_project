@@ -25,9 +25,23 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r streaming_project/requirements.txt
-    - name: Set up secrets.json
+    - name: Create JSON from Git Secrets
+      if: github.event_name == 'push'  # 푸시 이벤트가 발생한 경우에만 실행
       run: |
-        echo '${{ secrets.SECRET_JSON }}' > streaming_project/secrets.json
+        echo '{
+          "POSTGRESQL_KEY": "${{ secrets.POSTGRESQL_KEY }}",
+          "POSTGRESQL_USER": "${{ secrets.POSTGRESQL_USER }}",
+          "POSTGRESQL_NAME": "${{ secrets.POSTGRESQL_NAME }}",
+          "POSTGRESQL_HOST": "${{ secrets.POSTGRESQL_HOST }}",
+          "NAVER_KEY": "${{ secrets.NAVER_KEY }}",
+          "NAVER_SECRET": "${{ secrets.NAVER_SECRET }}",
+          "AWS_ACCESS_KEY": "${{ secrets.AWS_ACCESS_KEY }}",
+          "AWS_SECRET_KEY": "${{ secrets.AWS_SECRET_KEY }}",
+          "AWS_BUKET_DOMAIN": "${{ secrets.AWS_BUKET_DOMAIN }}",
+          "AWS_BUKET_NAME": "${{ secrets.AWS_BUKET_NAME }}",
+          "AWS_STATIC": "${{ secrets.AWS_STATIC }}",
+          "AWS_MEDIA": "${{ secrets.AWS_MEDIA }}"
+        }' > secrets.json
     - name: Run Tests
       run: |
         python streaming_project/manage.py test
