@@ -9,42 +9,40 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
-    <title> 라프텔</title>
+    <title> 오르미테일</title>
 </head>
 <body>
     {% include 'main/nav.html' %}
 
     <section class ="post-list">
         <!-- 최고 조회수 게시글 = best_article -->
+        {% for item in data %}{% if forloop.first %}
         <div class = "first-post-box">
             <div class="container desktop">
                     <div class="post-info-box">
-                        <h3 id="anime-name">{{ data.name }}</h3>
-                        <div id="anime-content">{{ data.content}}</div>
+                        {% comment %} <h3>{{ item.name }}</h3> {% endcomment %}
+                        <div>{{ item.content }}</div>
                     </div>
-                <div class="thumbnail-img" id="anime-img"></div>
+                <div class="thumbnail-img"><img src="{{ item.img }}"></div>
             </div>
         </div>
+        {% endif %}{% endfor %}
         <!-- 전체 게시글들 -->
         <article class = "post-box">
             <div class="container">
                 
-                    {% for item in data %}
+                    {% for item in data %}{% if not forloop.first%}
                         <div class="card">
                             <div class="card-thumbnail-img">
                                     <img src="{{ item.img }}" alt="Thumbnail image" />
                             </div>
-                            <a 
-                            {% comment %} href="{% url 'post_detail' post.id %}" {% endcomment %}
-                            >
                             <div class="card-info-box">
-                                {% comment %} <p>{{ post.created_at|date:'Y-m-d H:i' }} | {{post.user_id}}</p>
-                                    <h3>{{ post.title }}</h3>
-                                    <div class="sub-info">{{ post.content|text_only }} </div>  {% endcomment %}
+                                    <h3>{{ item.name }}</h3>
+                                    <div class="sub-info">{{ item.content }} </div>
                             </div>
                             </a>
                         </div>
-                    {% endfor %}
+                    {% endif %}{% endfor %}
             </div>
         
         </article>

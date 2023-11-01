@@ -19,14 +19,14 @@ body {
 
 /* 상단박스 */
 .first-post-box {
-    background-color: #1e1e1e;
+    background-color: transparent;
     height: 520px;
     color: #fff;
     font-family: 'Pretendard', sans-serif;
 }
 
 .first-post-box h3 {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 700;
     margin: 0;
     /* padding-top: 3%; */
@@ -84,12 +84,22 @@ body {
     transition: transform 0.8s;
 }
 
-.thumbnail-img {
-    opacity: 0.7;
+.thumbnail-img{
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
     /* height: -webkit-fill-available; */
     /* border : 5px solid white; */
     /* padding-left: 30%; */
+    object-fit: cover;
     justify-content: center;
+}
+
+.thumbnail-img img{
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    justify-content:space-between;
 }
 
 .first_image {
@@ -164,7 +174,7 @@ body {
 
 h3 {
     font-family: 'Pretendard', sans-serif;
-    font-size: 20px;
+    font-size: 10px;
     margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;

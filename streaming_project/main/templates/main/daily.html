@@ -7,44 +7,28 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{% static 'css/day.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
-    <title>Document</title>
+    <title>요일별 신작</title>
 </head>
 <body>
     {% include 'main/nav.html' %}
-    <h3>요일별 신작</h3>
-    <div>안내사항</div>
 
-    {% for day, anime_list in data.items %}
-    <h2>{{ day }} 방영 애니메이션</h2>
-    <ul>
-      {% for item in anime_list %}
-        <li>{{ item.name }} (방영 시간: {{ item.distributed_air_time }})</li>
-      {% endfor %}
-    </ul>
-    {% endfor %}
-    <div>
-        <div>
-            월
-        </div>
-        <div>
-            화
-        </div>
-        <div>
-            수
-        </div>
-        <div>
-            목
-        </div>
-        <div>
-            금
-        </div>
-        <div>
-            토
-        </div>
-        <div>
-            일
-        </div>
+<div class="day_top">
+    <h1 style="margin:10px;font-size:20px;">요일별 신작</h1>
+    <div class="week_list">
+        {% for day, anime_list in data.items %}
+            <div class="day_list">
+                <h2>{{ day }}</h2>
+                {% for item in anime_list %}
+                    <div class="day_box">
+                        <div><img class="day_img" src="{{ item.img }}"></div>
+                        <div class="day_name">{{ item.name }}</div>
+                    </div>  
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
+</div>
 </body>
 </html>

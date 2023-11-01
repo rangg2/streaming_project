@@ -64,11 +64,12 @@ def signup(request):
 def main(request):
     return render(request, 'main/main.html')
 def tag(request):
-    return render(request, 'main/tag.html')
+    data = Anime.objects.all()
+    return render(request, 'main/tag.html', {'data': data})
 def recommend(request):
     return render(request, 'main/recommend.html')
 
-def Anime_list(request):
+def daily(request):
     # 요일별로 데이터 필터링
     data = {
         '월요일': Anime.objects.filter(distributed_air_time='월요일'),
@@ -203,5 +204,5 @@ class AnimeView(APIView):
     
 def Anime_list(request):
     data = Anime.objects.all()
-    serializer = AnimeSerializer(data, many=True)
-    return render(request, 'main/main_cp.html', {'data': serializer.data})
+    # serializer = AnimeSerializer(data, many=True)
+    return render(request, 'main/main_cp.html', {'data': data})

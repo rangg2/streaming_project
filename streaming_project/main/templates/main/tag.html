@@ -9,34 +9,43 @@
     <link rel="stylesheet" href="{% static 'css/reset.css' %}?{% now "U" %}">
     <link rel="stylesheet" href="{% static 'css/tag.css' %}?{% now "U" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}?{% now "U" %}"/>
-    <title>Document</title>
+    <title>태그 검색</title>
 </head>
 <body>
     {% include 'main/nav.html' %}
 <div class="content">
-    <h3>태그검색</h3>
-    <div>
-        <div>
-            필터
+    <h2>태그검색</h2>
+    <div class="big_box">
+        <div class="tag_box">
+            <div class="tag_mini">
+                필터
+            </div>
+            <div class="tag_mini">
+                장르
+                <div><input type="checkbox" value="추리">추리</div>
+                <div><input type="checkbox">코미디</div>
+                <div><input type="checkbox">일상</div>
+            </div>
+            <div class="tag_mini">        
+                년도
+                <div><input type="checkbox" value="2023">2023</div>
+                <div><input type="checkbox">2022</div>
+                <div><input type="checkbox">2021</div>
+            </div>
+            <div class="tag_mini">        
+                방영
+                <div><input type="checkbox" value="방영중">방영중</div>
+                <div><input type="checkbox">완결</div>
+            </div>
         </div>
-        <div>
-            장르
+        <div class="video_box">
+            {% for item in data %}
+            <div class="video_info_box">
+                <div><img src="{{ item.img }}"></div>
+                <div>{{ item.name }}</div>
+            </div>
+            {% endfor %}
         </div>
-        <div>        
-            태그
-        </div>
-        <div>        
-            년도
-        </div>
-        <div>        
-            방영
-        </div>
-        <div>        
-            출시타입
-        </div>
-    </div>
-    <div>
-        영상 영상 영상
     </div>
 </div>
 
